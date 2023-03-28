@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import HttpException from '../errors/HttpException';
+import HttpStatus from '../utils/http-status.enum';
 
 function HttpErrorMiddleware(
   err: HttpException,
@@ -12,7 +13,7 @@ function HttpErrorMiddleware(
   }
 
   const { status, message } = err;
-  res.status(status || 500).json({ message });
+  res.status(status || HttpStatus.INTERNAL_ERROR).json({ message });
 }
 
 export default HttpErrorMiddleware;
