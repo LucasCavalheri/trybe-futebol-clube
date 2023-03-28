@@ -1,10 +1,15 @@
+import 'express-async-errors';
 import * as express from 'express';
+import HttpErrorMiddleware from './api/middlewares/HttpError';
+import routes from './api/routes';
 
 class App {
   public app: express.Express;
 
   constructor() {
     this.app = express();
+
+    this.routes();
 
     this.config();
 
@@ -22,6 +27,11 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use(HttpErrorMiddleware);
+  }
+
+  private routes() {
+    this.app.use(routes);
   }
 
   public start(PORT: string | number):void {
