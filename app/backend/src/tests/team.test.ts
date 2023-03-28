@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('/teams integration tests', () => {
+describe('teams integration tests', () => {
   afterEach(() => sinon.restore());
 
   describe('findAll', () => {
