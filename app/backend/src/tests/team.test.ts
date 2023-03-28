@@ -35,7 +35,7 @@ describe('teams integration tests', () => {
 
       expect(response.body).to.deep.equal(oneTeam);
       expect(response.status).to.equal(HttpStatus.OK);
-    })
+    });
 
     it('should return 404 and message "team not found"', async function () {
       sinon.stub(Model, 'findByPk').resolves(null);
@@ -44,6 +44,6 @@ describe('teams integration tests', () => {
 
       expect(response.body).to.deep.equal({ message: 'team not found' });
       expect(response.status).to.equal(HttpStatus.NOT_FOUND);
-    })
-  })
+    });
+  });
 });
