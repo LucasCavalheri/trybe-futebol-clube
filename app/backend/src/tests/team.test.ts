@@ -7,6 +7,7 @@ import { app } from '../app';
 
 import { Model } from 'sequelize';
 import { allTeams, oneTeam } from './mocks/team.mock';
+import HttpStatus from '../api/utils/http-status.enum';
 
 chai.use(chaiHttp);
 
@@ -22,7 +23,7 @@ describe('/teams integration tests', () => {
       const response = await chai.request(app).get('/teams').send();
 
       expect(response.body).to.deep.equal(allTeams);
-      expect(response.status).to.equal(200);
+      expect(response.status).to.equal(HttpStatus.OK);
     });
   });
 
@@ -33,7 +34,16 @@ describe('/teams integration tests', () => {
       const response = await chai.request(app).get('/teams/16').send();
 
       expect(response.body).to.deep.equal(oneTeam);
-      expect(response.status).to.equal(200);
+      expect(response.status).to.equal(HttpStatus.OK);
+    })
+
+    it('should return 404 and message "team not found"', async function () {
+      sinon.stub(Model, 'findByPk').resolves(null);
+
+      const response = await chai.request(app).get('/teams/9999').send();
+
+      expect(response.body).to.deep.equal({ message: 'team not found' });
+      expect(response.status).to.equal(HttpStatus.NOT_FOUND);
     })
   })
 });
