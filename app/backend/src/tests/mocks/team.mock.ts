@@ -65,4 +65,6 @@ export const allTeams = [
     id: 16,
     team_name: 'São Paulo',
   },
-] as unknown as Team[] // If this was intentional, convert the expression to 'unknown' first.;
+] as unknown as Team[]; // If this was intentional, convert the expression to 'unknown' first.;
+
+export const oneTeam = { id: 16, team_name: 'São Paulo' } as unknown as Team;

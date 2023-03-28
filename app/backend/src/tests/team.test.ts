@@ -6,7 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 
 import { Model } from 'sequelize';
-import { allTeams } from './mocks/team.mock';
+import { allTeams, oneTeam } from './mocks/team.mock';
 
 chai.use(chaiHttp);
 
@@ -25,4 +25,15 @@ describe('/teams integration tests', () => {
       expect(response.status).to.equal(200);
     });
   });
+
+  describe('findByPk', () => {
+    it('should return one team', async function () {
+      sinon.stub(Model, 'findByPk').resolves(oneTeam);
+
+      const response = await chai.request(app).get('/teams/16').send();
+
+      expect(response.body).to.deep.equal(oneTeam);
+      expect(response.status).to.equal(200);
+    })
+  })
 });
