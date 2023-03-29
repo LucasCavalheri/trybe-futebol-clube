@@ -12,7 +12,7 @@ export default class MatchService implements IMatchService {
   constructor(private matchModel: ModelStatic<Match> = Match) {}
 
   public findAll = async (matchProgress: string): Promise<IMatch[]> => {
-    const inProgressCondition = matchProgress ? { matchProgress: JSON.parse(matchProgress) } : {};
+    const inProgressCondition = matchProgress ? { inProgress: JSON.parse(matchProgress) } : {};
 
     const matches = await this.matchModel.findAll({
       include: [
@@ -48,10 +48,10 @@ export default class MatchService implements IMatchService {
   };
 
   private teamExists = async (homeId: number, awayId: number): Promise<void> => {
-    const homeTeam = await this.matchModel.findOne({ where: { id: homeId } });
-    const awayTeam = await this.matchModel.findOne({ where: { id: awayId } });
+    const teamPromises = [homeId, awayId].map(async (id) => this.matchModel.findByPk(id));
+    const teams = await Promise.all(teamPromises);
 
-    if (!homeTeam || !awayTeam) {
+    if (teams.some((el) => !el)) { // team are undefined
       throw new HttpException(HttpStatus.NOT_FOUND, ErrorMessage.TEAM_NOT_FOUND);
     }
   };
