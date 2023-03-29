@@ -1,3 +1,5 @@
+import { IGoal } from '../../api/interfaces/Match/IGoal';
+import { IMatch } from '../../api/interfaces/Match/IMatch';
 import Match from '../../database/models/match.model';
 
 export const matches = [
@@ -680,3 +682,38 @@ export const finishedMatches = [
     in_progress: false,
   },
 ] as unknown as Match[];
+
+export const matchGoals: IGoal = {
+  homeTeamGoals: 3,
+  awayTeamGoals: 1,
+};
+
+export const newMatch = {
+  id: 1,
+  homeTeamId: 16,
+  homeTeamGoals: 2,
+  awayTeamId: 8,
+  awayTeamGoals: 2,
+  inProgress: true,
+} as unknown as Match;
+
+export const matchReqBody: IMatch = {
+  homeTeamId: 16, 
+  awayTeamId: 8, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+}
+
+export const matchWithSameTeam: IMatch = {
+  homeTeamId: 1,
+  awayTeamId: 1,
+  homeTeamGoals: 5,
+  awayTeamGoals: 5,
+}
+
+export const matchWithNonExistentTeams: IMatch = {
+  homeTeamId: 99,
+  awayTeamId: 88,
+  homeTeamGoals: 3,
+  awayTeamGoals: 3,
+}
