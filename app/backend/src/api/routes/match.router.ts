@@ -7,8 +7,8 @@ const router = Router();
 const matchController = new MatchController();
 
 router.post('/', AuthMiddleware, matchController.create);
-router.get('/', AuthMiddleware, matchController.findAll);
-router.patch('/:id', AuthMiddleware, matchController.finishInProgressMatch);
+router.get('/', matchController.findAll);
 router.patch('/:id/finish', AuthMiddleware, matchController.finishMatch);
+router.patch('/:id', AuthMiddleware, matchController.finishInProgressMatch);
 
 export default router;
