@@ -3,6 +3,7 @@ import Team from '../../database/models/team.model';
 import HttpException from '../errors/HttpException';
 import { ITeam } from '../interfaces/Team/ITeam';
 import { ITeamService } from '../interfaces/Team/ITeamService';
+import ErrorMessage from '../utils/error-messages.enum';
 import HttpStatus from '../utils/http-status.enum';
 
 export default class TeamService implements ITeamService {
@@ -16,7 +17,7 @@ export default class TeamService implements ITeamService {
   public findByPk = async (id: number): Promise<ITeam> => {
     const team: ITeam | null = await this.teamModel.findByPk(id);
 
-    if (!team) throw new HttpException(HttpStatus.NOT_FOUND, 'team not found');
+    if (!team) throw new HttpException(HttpStatus.NOT_FOUND, ErrorMessage.TEAM_NOT_FOUND);
 
     return team;
   };
