@@ -6,10 +6,19 @@ import HttpStatus from '../utils/http-status.enum';
 export default class MatchController implements IMatchController {
   constructor(private matchService = new MatchService()) {}
 
-  public findAll = async (req: Request, res: Response): Promise<Response | void> => {
+  public findAll = async (
+    req: Request,
+    res: Response,
+  ): Promise<Response | void> => {
     const { inProgress } = req.query;
 
     const matches = await this.matchService.findAll(inProgress as string);
     return res.status(HttpStatus.OK).json(matches);
+  };
+
+  public finishMatch = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const finishedMatch = await this.matchService.finishMatch(+id);
+    return res.status(HttpStatus.OK).json({ message: finishedMatch });
   };
 }

@@ -20,4 +20,9 @@ export default class MatchService implements IMatchService {
 
     return matches;
   };
+
+  public finishMatch = async (matchId: number): Promise<string> => {
+    await this.matchModel.update({ inProgress: false }, { where: { id: matchId } });
+    return 'Finished';
+  };
 }
