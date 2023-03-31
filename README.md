@@ -2,7 +2,7 @@
   <img width="180px" alt="controle-estoque" src="https://cdn-icons-png.flaticon.com/512/4297/4297965.png" />
   <h1>Trybe Futebol Clube</h1>
   <p>
-    Uma aplicaço Full-Stack onde é possível pesquisar, adicionar e editar partidas e times de futebol. Também é possível visualizar e listar uma tabela com pontos e informações sobre tais times.
+    Uma aplicação Full-Stack onde é possível pesquisar, adicionar e editar partidas e times de futebol. Também é possível visualizar e listar uma tabela com pontos e informações sobre tais times.
   </p>
 </div>
 
